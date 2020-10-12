@@ -47,4 +47,16 @@ class MyLinkedListTest {
 				&& myLinkedList.tail.equals(thirdNode);
 		assertTrue(result);
 	}
+
+	@Test
+	public void popMethod_shouldPop_firstNode() {
+		MyNode<Integer> firstNode = new MyNode<>(56);
+		MyNode<Integer> secondNode = new MyNode<>(30);
+		MyNode<Integer> thirdNode = new MyNode<>(70);
+		MyLinkedList myLinkedList = new MyLinkedList();
+		myLinkedList.addAtTail(firstNode);
+		myLinkedList.addAtTail(secondNode);
+		myLinkedList.addAtTail(thirdNode);
+		assertEquals(firstNode, myLinkedList.pop());
+	}
 }
