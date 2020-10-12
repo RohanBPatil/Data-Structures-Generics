@@ -11,10 +11,14 @@ class MyLinkedListTest {
 		MyNode<Integer> firstNode = new MyNode<>(70);
 		MyNode<Integer> secondNode = new MyNode<>(30);
 		MyNode<Integer> thirdNode = new MyNode<>(56);
+		MyLinkedList myLinkedList = new MyLinkedList();
+		myLinkedList.add(firstNode);
+		myLinkedList.add(secondNode);
+		myLinkedList.add(thirdNode);
 
-		firstNode.setNext(secondNode);
-		secondNode.setNext(thirdNode);
-		assertTrue(firstNode.getNext() == secondNode && secondNode.getNext() == thirdNode);
+		boolean result = myLinkedList.head.equals(thirdNode) && myLinkedList.head.getNext().equals(secondNode)
+				&& myLinkedList.head.getNext().equals(firstNode);
+		assertTrue(result);
 	}
 
 }
