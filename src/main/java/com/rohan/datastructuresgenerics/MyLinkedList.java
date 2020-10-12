@@ -74,8 +74,24 @@ public class MyLinkedList {
 			traverseNode = traverseNode.getNext();
 		}
 
-		INode tempNode = tail;
 		tail = traverseNode;
-		return tempNode;
+		traverseNode = traverseNode.getNext();
+		return traverseNode;
+	}
+
+	/**
+	 * UC 7 searching for element, returns node if present
+	 * 
+	 * @param integer
+	 * @return
+	 */
+	public INode search(Integer integer) {
+		INode temp = head;
+		while (!temp.getNext().equals(null)) {
+			if (temp.getKey().equals(integer))
+				break;
+			temp = temp.getNext();
+		}
+		return temp;
 	}
 }
