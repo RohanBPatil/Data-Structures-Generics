@@ -1,8 +1,8 @@
 package com.rohan.datastructuresgenerics;
 
-public class MyLinkedList {
-	public INode head;
-	public INode tail;
+public class MyLinkedList<k> {
+	public INode<k> head;
+	public INode<k> tail;
 
 	public MyLinkedList() {
 		this.head = null;
@@ -14,7 +14,7 @@ public class MyLinkedList {
 	 * 
 	 * @param newNode
 	 */
-	public void addAtHead(INode newNode) {
+	public void addAtHead(INode<k> newNode) {
 		if (head == null)
 			head = newNode;
 		if (tail == null)
@@ -30,7 +30,7 @@ public class MyLinkedList {
 	 * 
 	 * @param newNode
 	 */
-	public void addAtTail(INode newNode) {
+	public void addAtTail(INode<k> newNode) {
 		if (head == null)
 			head = newNode;
 		if (tail == null)
@@ -47,7 +47,7 @@ public class MyLinkedList {
 	 * @param myNode
 	 * @param newNode
 	 */
-	public void insert(INode myNode, INode newNode) {
+	public void insert(INode<k> myNode, INode<k> newNode) {
 		newNode.setNext(myNode.getNext());
 		myNode.setNext(newNode);
 	}
@@ -57,8 +57,8 @@ public class MyLinkedList {
 	 * 
 	 * @return
 	 */
-	public INode pop() {
-		INode poppedNode = head;
+	public INode<k> pop() {
+		INode<k> poppedNode = head;
 		head = head.getNext();
 		return poppedNode;
 	}
@@ -68,15 +68,16 @@ public class MyLinkedList {
 	 * 
 	 * @return
 	 */
-	public INode popLast() {
-		INode traverseNode = head;
-		while (!traverseNode.getNext().equals(tail)) {
-			traverseNode = traverseNode.getNext();
+	public INode<k> popLast() {
+		INode<k> tempNode = head;
+		while (!tempNode.getNext().equals(tail)) {
+			tempNode = tempNode.getNext();
 		}
 
-		tail = traverseNode;
-		traverseNode = traverseNode.getNext();
-		return traverseNode;
+		tail = tempNode;
+		tempNode = tempNode.getNext();
+		tail.setNext(null);
+		return tempNode;
 	}
 
 	/**
@@ -85,14 +86,14 @@ public class MyLinkedList {
 	 * @param integer
 	 * @return
 	 */
-	public INode search(Integer integer) {
-		INode temp = head;
-		while (!temp.getNext().equals(null)) {
-			if (temp.getKey().equals(integer))
-				break;
-			temp = temp.getNext();
+	public boolean search(Integer integer) {
+		INode<k> tempNode = head;
+		while (!tempNode.getNext().equals(null)) {
+			if (tempNode.getKey().equals(integer))
+				return true;
+			tempNode = tempNode.getNext();
 		}
-		return temp;
+		return false;
 	}
 
 	/**
@@ -101,9 +102,66 @@ public class MyLinkedList {
 	 * @param integer
 	 * @param newNode
 	 */
-	public void addAfterElement(Integer integer, INode newNode) {
-		INode tempNode = search(integer);
+	public void addAfterElement(Integer integer, INode<k> newNode) {
+		INode<k> tempNode = head;
+		while (!tempNode.getNext().equals(null)) {
+			if (tempNode.getKey().equals(integer))
+				break;
+			tempNode = tempNode.getNext();
+		}
 		newNode.setNext(tempNode.getNext());
 		tempNode.setNext(newNode);
+
 	}
+
+	/**
+	 * UC 9 deleting any element
+	 * 
+	 * @param integer
+	 */
+	public int delete(Integer integer) {
+		INode<k> temp = head;
+		INode<k> prev = head;
+		if (head.getKey().equals(integer))
+			head = head.getNext();
+		else if(tail.getKey().equals(integer)) {
+			popLast();
+		}
+		else {
+			while (temp.getNext() != null) {
+				if (temp.getKey().equals(integer))
+					break;
+				prev = temp;
+				temp = temp.getNext();
+			}
+			prev.setNext(temp.getNext());
+		}
+		return size();
+	}
+
+	/**
+	 * UC 9 showing size of linked list
+	 * 
+	 * @return
+	 */
+	public int size() {
+		INode<k> temp = head;
+		int size = 0;
+		while (temp.getNext() != null) {
+			size++;
+			temp = temp.getNext();
+		}
+		return size + 1;
+	}
+
+	public void print() {
+		INode<k> temp = head;
+		while (temp.getNext() != null) {
+			System.out.print(temp.getKey() + "->");
+			temp = temp.getNext();
+		}
+		System.out.print(temp.getKey());
+		System.out.println();
+	}
+
 }

@@ -11,7 +11,7 @@ class MyLinkedListTest {
 		MyNode<Integer> firstNode = new MyNode<>(56);
 		MyNode<Integer> secondNode = new MyNode<>(30);
 		MyNode<Integer> thirdNode = new MyNode<>(70);
-		MyLinkedList myLinkedList = new MyLinkedList();
+		MyLinkedList<Integer> myLinkedList = new MyLinkedList<Integer>();
 		myLinkedList.addAtHead(firstNode);
 		myLinkedList.addAtHead(secondNode);
 		myLinkedList.addAtHead(thirdNode);
@@ -25,7 +25,7 @@ class MyLinkedListTest {
 		MyNode<Integer> firstNode = new MyNode<>(56);
 		MyNode<Integer> secondNode = new MyNode<>(30);
 		MyNode<Integer> thirdNode = new MyNode<>(70);
-		MyLinkedList myLinkedList = new MyLinkedList();
+		MyLinkedList<Integer> myLinkedList = new MyLinkedList<Integer>();
 		myLinkedList.addAtTail(firstNode);
 		myLinkedList.addAtTail(secondNode);
 		myLinkedList.addAtTail(thirdNode);
@@ -39,7 +39,7 @@ class MyLinkedListTest {
 		MyNode<Integer> firstNode = new MyNode<>(56);
 		MyNode<Integer> secondNode = new MyNode<>(30);
 		MyNode<Integer> thirdNode = new MyNode<>(70);
-		MyLinkedList myLinkedList = new MyLinkedList();
+		MyLinkedList<Integer> myLinkedList = new MyLinkedList<Integer>();
 		myLinkedList.addAtTail(firstNode);
 		myLinkedList.addAtTail(thirdNode);
 		myLinkedList.insert(firstNode, secondNode);
@@ -53,7 +53,7 @@ class MyLinkedListTest {
 		MyNode<Integer> firstNode = new MyNode<>(56);
 		MyNode<Integer> secondNode = new MyNode<>(30);
 		MyNode<Integer> thirdNode = new MyNode<>(70);
-		MyLinkedList myLinkedList = new MyLinkedList();
+		MyLinkedList<Integer> myLinkedList = new MyLinkedList<Integer>();
 		myLinkedList.addAtTail(firstNode);
 		myLinkedList.addAtTail(secondNode);
 		myLinkedList.addAtTail(thirdNode);
@@ -65,7 +65,7 @@ class MyLinkedListTest {
 		MyNode<Integer> firstNode = new MyNode<>(56);
 		MyNode<Integer> secondNode = new MyNode<>(30);
 		MyNode<Integer> thirdNode = new MyNode<>(70);
-		MyLinkedList myLinkedList = new MyLinkedList();
+		MyLinkedList<Integer> myLinkedList = new MyLinkedList<Integer>();
 		myLinkedList.addAtTail(firstNode);
 		myLinkedList.addAtTail(secondNode);
 		myLinkedList.addAtTail(thirdNode);
@@ -73,15 +73,15 @@ class MyLinkedListTest {
 	}
 
 	@Test
-	public void searchMethod_shouldReturnNode_ifPresent() {
+	public void searchMethod_shouldReturnTrue_ifPresent() {
 		MyNode<Integer> firstNode = new MyNode<>(56);
 		MyNode<Integer> secondNode = new MyNode<>(30);
 		MyNode<Integer> thirdNode = new MyNode<>(70);
-		MyLinkedList myLinkedList = new MyLinkedList();
+		MyLinkedList<Integer> myLinkedList = new MyLinkedList<Integer>();
 		myLinkedList.addAtTail(firstNode);
 		myLinkedList.addAtTail(secondNode);
 		myLinkedList.addAtTail(thirdNode);
-		assertEquals(secondNode, myLinkedList.search(30));
+		assertTrue(myLinkedList.search(30));
 	}
 
 	@Test
@@ -90,12 +90,32 @@ class MyLinkedListTest {
 		MyNode<Integer> secondNode = new MyNode<>(30);
 		MyNode<Integer> thirdNode = new MyNode<>(70);
 		MyNode<Integer> fourthNode = new MyNode<>(40);
-		MyLinkedList myLinkedList = new MyLinkedList();
+		MyLinkedList<Integer> myLinkedList = new MyLinkedList<Integer>();
 		myLinkedList.addAtTail(firstNode);
 		myLinkedList.addAtTail(secondNode);
 		myLinkedList.addAtTail(thirdNode);
 		myLinkedList.addAfterElement(30, fourthNode);
 		boolean result = secondNode.getNext().equals(fourthNode);
 		assertTrue(result);
+
+	}
+
+	@Test
+	public void whenMethodsCalled_shouldDeleteAndShowSize() {
+		MyNode<Integer> firstNode = new MyNode<>(56);
+		MyNode<Integer> secondNode = new MyNode<>(30);
+		MyNode<Integer> thirdNode = new MyNode<>(70);
+		MyNode<Integer> fourthNode = new MyNode<>(40);
+		MyLinkedList<Integer> myLinkedList = new MyLinkedList<Integer>();
+		myLinkedList.addAtTail(firstNode);
+		myLinkedList.addAtTail(secondNode);
+		myLinkedList.addAtTail(thirdNode);
+		myLinkedList.addAtTail(fourthNode);
+		System.out.println("Linked List before deleting : ");
+		myLinkedList.print();
+		int size = myLinkedList.delete(40);
+		System.out.println("Linked List after deleting 40 : ");
+		myLinkedList.print();
+		assertEquals(3, size);
 	}
 }
