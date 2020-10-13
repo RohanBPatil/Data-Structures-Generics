@@ -1,6 +1,6 @@
 package com.rohan.datastructuresgenerics;
 
-public interface INode<k> {
+public interface INode<k extends Comparable<k>> {
 	public k getKey();
 
 	public void setKey(k key);

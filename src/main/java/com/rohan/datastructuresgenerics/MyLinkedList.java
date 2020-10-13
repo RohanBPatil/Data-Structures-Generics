@@ -1,6 +1,6 @@
 package com.rohan.datastructuresgenerics;
 
-public class MyLinkedList<k> {
+public class MyLinkedList<k extends Comparable<k>> {
 	public INode<k> head;
 	public INode<k> tail;
 
@@ -124,10 +124,9 @@ public class MyLinkedList<k> {
 		INode<k> prev = head;
 		if (head.getKey().equals(integer))
 			head = head.getNext();
-		else if(tail.getKey().equals(integer)) {
+		else if (tail.getKey().equals(integer)) {
 			popLast();
-		}
-		else {
+		} else {
 			while (temp.getNext() != null) {
 				if (temp.getKey().equals(integer))
 					break;
@@ -164,4 +163,34 @@ public class MyLinkedList<k> {
 		System.out.println();
 	}
 
+	/**
+	 * UC 10 adding node in ascending order in linked list
+	 * 
+	 * @param newNode
+	 * @return
+	 */
+	public boolean addInOrder(INode<k> newNode) {
+		INode<k> temp = head;
+		if (head == null) { // if linked list is empty then setting new node as head and tail
+			head = newNode;
+			tail = newNode;
+		} else if (head.getKey().compareTo(newNode.getKey()) > 0) { // if new node is less than head then setting new
+																	// node head
+			newNode.setNext(temp);
+			head = newNode;
+		} else if (tail.getKey().compareTo(newNode.getKey()) < 0) { // if new node is more than tail then setting new
+																	// node tail
+			tail.setNext(newNode);
+			tail = newNode;
+		} else {
+			INode<k> prev = head;
+			while (temp.getNext() != null && temp.getKey().compareTo(newNode.getKey()) < 0) {
+				prev = temp;
+				temp = temp.getNext();
+			}
+			newNode.setNext(prev.getNext());
+			prev.setNext(newNode);
+		}
+		return true;
+	}
 }

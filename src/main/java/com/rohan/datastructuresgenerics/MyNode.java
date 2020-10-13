@@ -1,6 +1,6 @@
 package com.rohan.datastructuresgenerics;
 
-public class MyNode<k> implements INode<k> {
+public class MyNode<k extends Comparable<k>> implements INode<k> {
 	private k key;
 	private INode<k> next;
 
