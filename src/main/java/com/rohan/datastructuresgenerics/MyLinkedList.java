@@ -20,8 +20,8 @@ public class MyLinkedList<k extends Comparable<k>> {
 		if (tail == null)
 			tail = newNode;
 		else {
-			tail.setNext(newNode);
-			tail = newNode;
+			newNode.setNext(head);
+			head = newNode;
 		}
 	}
 
